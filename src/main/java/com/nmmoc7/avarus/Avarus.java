@@ -20,6 +20,7 @@ import java.util.stream.Collectors;
 @Mod(Avarus.MOD_ID)
 public class Avarus {
     public static final String MOD_ID = "avarus";
+
     public Avarus() {
     }
 }
