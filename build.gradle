@@ -115,6 +115,8 @@ repositories {
     // flatDir {
     //     dir 'libs'
     // }
+
+    maven { url 'https://dvs1.progwml6.com/files/maven' }
 }
 
 dependencies {
@@ -124,6 +126,8 @@ dependencies {
     minecraft 'net.minecraftforge:forge:1.18.2-40.0.42'
 
     implementation fg.deobf('com.github.glitchfiend:TerraBlender-forge:1.18.2-' + terrablender_version)
+    compileOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}:api")
+    runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}")
 }
 
 // Example for how to get properties into the manifest for reading at runtime.
