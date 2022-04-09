@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": {
+    "item": "avarus:colorful_powder"
+  },
+  "result": "avarus:colorful_alloy",
+  "experience": 0.2,
+  "cookingtime": 100
+}

@@ -19,8 +19,23 @@ public class AvarusRegion extends Region {
         super(name, RegionType.OVERWORLD, weight);
     }
 
+    private final Climate.Parameter FULL_RANGE = Climate.Parameter.span(-1.0F, 1.0F);
+
     @Override
     public void addBiomes(Registry<Biome> registry, Consumer<Pair<Climate.ParameterPoint, ResourceKey<Biome>>> mapper) {
-        super.addBiomes(registry, mapper);
+        addBiome(
+                mapper,
+                new Climate.ParameterPoint(
+                        FULL_RANGE,
+                        FULL_RANGE,
+                        FULL_RANGE,
+                        FULL_RANGE,
+                        // depth
+                        Climate.Parameter.span(-1, 0),
+                        FULL_RANGE,
+                        0
+                ),
+                BiomesRegister.TEST
+        );
     }
 }

@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "RRG",
+    "YCG",
+    "YBB"
+  ],
+  "key": {
+    "R": {
+      "item": "avarus:red_dirt"
+    },
+    "B": {
+      "item": "avarus:blue_dirt"
+    },
+    "G": {
+      "item": "avarus:green_dirt"
+    },
+    "Y": {
+      "item": "avarus:yellow_dirt"
+    },
+    "C": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "result": {
+    "item": "avarus:colorful_powder"
+  }
+}

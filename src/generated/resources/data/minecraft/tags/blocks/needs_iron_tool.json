@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "avarus:red_dirt",
+    "avarus:green_dirt",
+    "avarus:yellow_dirt",
+    "avarus:blue_dirt"
+  ]
+}
