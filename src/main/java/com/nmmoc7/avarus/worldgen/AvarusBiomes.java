@@ -42,9 +42,9 @@ public class AvarusBiomes {
         BiomeDefaultFeatures.addSurfaceFreezing(builder);
     }
 
-    public static Biome test() {
-        MobSpawnSettings.Builder mobspawnsettings$builder = new MobSpawnSettings.Builder();
-        BiomeDefaultFeatures.dripstoneCavesSpawns(mobspawnsettings$builder);
+    public static Biome colorfulDirt() {
+        MobSpawnSettings.Builder spawnSetting = new MobSpawnSettings.Builder();
+        BiomeDefaultFeatures.dripstoneCavesSpawns(spawnSetting);
 
         BiomeGenerationSettings.Builder builder = new BiomeGenerationSettings.Builder();
         globalOverworldGeneration(builder);
@@ -55,13 +55,13 @@ public class AvarusBiomes {
         builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, OreList.YELLOW_DIRT);
 
         BiomeDefaultFeatures.addPlainGrass(builder);
-        //BiomeDefaultFeatures.addDefaultOres(builder, true);
+        BiomeDefaultFeatures.addDefaultOres(builder, true);
         BiomeDefaultFeatures.addDefaultSoftDisks(builder);
         BiomeDefaultFeatures.addPlainVegetation(builder);
         BiomeDefaultFeatures.addDefaultMushrooms(builder);
         BiomeDefaultFeatures.addDefaultExtraVegetation(builder);
 
         Music music = Musics.createGameMusic(SoundEvents.MUSIC_BIOME_DRIPSTONE_CAVES);
-        return biome(Biome.Precipitation.RAIN, Biome.BiomeCategory.UNDERGROUND, 0.8F, 0.4F, mobspawnsettings$builder, builder, music);
+        return biome(Biome.Precipitation.RAIN, Biome.BiomeCategory.UNDERGROUND, 0.8F, 0.4F, spawnSetting, builder, music);
     }
 }

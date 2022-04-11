@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "package": "com.nmmoc7.avarus.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "refmap": "avarus.refmap.json",
+  "mixins": [
+  ],
+  "client": [
+  ],
+  "server": [],
+  "minVersion": "0.8",
+  "injectors": {
+    "defaultRequire": 1
+	}
+}

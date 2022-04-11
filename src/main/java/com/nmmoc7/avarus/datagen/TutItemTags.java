@@ -5,6 +5,7 @@ import com.nmmoc7.avarus.item.AvarusItems;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraft.data.tags.ItemTagsProvider;
+import net.minecraft.world.item.Items;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
 /**
@@ -23,6 +24,11 @@ public class TutItemTags extends ItemTagsProvider {
                 .add(AvarusItems.GREEN_DIRT.get())
                 .add(AvarusItems.BLUE_DIRT.get())
                 .add(AvarusItems.YELLOW_DIRT.get());
+
+        tag(AvarusItemTags.HAMMER_ITEMS)
+                .add(AvarusItems.IRON_HAMMER.get())
+                .add(AvarusItems.COLORFUL_ALLOY_HAMMER.get())
+                .add(Items.IRON_SWORD);
     }
 
     @Override

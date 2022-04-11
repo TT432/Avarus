@@ -11,4 +11,5 @@ import net.minecraft.world.item.Item;
  **/
 public class AvarusItemTags {
     public static final TagKey<Item> COLORFUL_DIRT = ItemTags.create(new ResourceLocation(Avarus.MOD_ID, "colorful_dirt"));
+    public static final TagKey<Item> HAMMER_ITEMS = ItemTags.create(new ResourceLocation(Avarus.MOD_ID, "hammer_items"));
 }

@@ -35,7 +35,7 @@ public class AvarusRegion extends Region {
                         FULL_RANGE,
                         0
                 ),
-                BiomesRegister.TEST
+                BiomesRegister.COLORFUL_DIRT
         );
     }
 }

@@ -15,12 +15,12 @@ import net.minecraftforge.registries.IForgeRegistry;
  **/
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class BiomesRegister {
-    public static final ResourceKey<Biome> TEST = register("test");
+    public static final ResourceKey<Biome> COLORFUL_DIRT = register("colorful_dirt");
 
     @SubscribeEvent
     public static void registerBiomes(RegistryEvent.Register<Biome> event) {
         IForgeRegistry<Biome> registry = event.getRegistry();
-        registry.register(AvarusBiomes.test().setRegistryName(TEST.location()));
+        registry.register(AvarusBiomes.colorfulDirt().setRegistryName(COLORFUL_DIRT.location()));
     }
 
     private static ResourceKey<Biome> register(String name)

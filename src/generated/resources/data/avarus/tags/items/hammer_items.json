@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "avarus:iron_hammer",
+    "avarus:colorful_alloy_hammer",
+    "minecraft:iron_sword"
+  ]
+}

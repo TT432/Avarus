@@ -14,6 +14,8 @@ de23760ae9b7352d54902b66e3e9d10912c8acf1 data/avarus/advancements/recipes/avarus
 4ca33fd0df2d7cce13f7d4c0948c4f300f2db51c data/avarus/advancements/recipes/avarus/colorful_powder.json
 faf118304a829d051a3297fcabd9ceea11c39a29 data/avarus/recipes/colorful_alloy.json
 657ce25a0c8bdae3863f13971bddff788c6e8721 data/avarus/recipes/colorful_powder.json
+9b54c9e218bbddcadf755b68a8f20e368b91e014 data/avarus/recipes/iron_plate.json
 9ff63be810660d62180c48e36dd2995fae1f720b data/avarus/tags/items/colorful_dirt.json
+be24b0999e22adcaa4c09576cee1817a93d3df68 data/avarus/tags/items/hammer_items.json
 ff06fab623b91664edd4d735f5ea8054c0cb6e93 data/minecraft/tags/blocks/mineable/shovel.json
 ff06fab623b91664edd4d735f5ea8054c0cb6e93 data/minecraft/tags/blocks/needs_iron_tool.json
