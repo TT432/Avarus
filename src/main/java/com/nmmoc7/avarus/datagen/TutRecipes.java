@@ -1,9 +1,6 @@
 package com.nmmoc7.avarus.datagen;
 
-import com.nmmoc7.avarus.datagen.recipes.AvarusRecipes;
-import com.nmmoc7.avarus.datagen.recipes.PlateRecipes;
-import com.nmmoc7.avarus.datagen.recipes.ToolTypeRecipes;
-import com.nmmoc7.avarus.datagen.recipes.UpgradeRecipes;
+import com.nmmoc7.avarus.datagen.recipes.*;
 import com.nmmoc7.avarus.item.AvarusItems;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.HashCache;
@@ -119,5 +116,6 @@ public class TutRecipes extends RecipeProvider {
         recipes.add(new PlateRecipes());
         recipes.add(new ToolTypeRecipes());
         recipes.add(new UpgradeRecipes());
+        recipes.add(new StoneCuttingRecipes());
     }
 }

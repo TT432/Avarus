@@ -1,11 +1,12 @@
 package com.nmmoc7.avarus;
 
 import com.nmmoc7.avarus.block.AvarusBlocks;
+import com.nmmoc7.avarus.fluids.AvarusFluids;
 import com.nmmoc7.avarus.item.AvarusItems;
 import com.nmmoc7.avarus.item.tools.HammerRecipeHandler;
 import com.nmmoc7.avarus.item.tools.TooltipsHandler;
-import com.nmmoc7.avarus.recipes.RecipeSerializers;
-import com.nmmoc7.avarus.recipes.RecipeTypes;
+import com.nmmoc7.avarus.recipes.register.RecipeSerializers;
+import com.nmmoc7.avarus.recipes.register.RecipeTypes;
 import com.nmmoc7.avarus.worldgen.AvarusRegion;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
@@ -31,6 +32,7 @@ public class Avarus {
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
         bus.addListener(this::commonSetup);
 
+        AvarusFluids.register(bus);
         AvarusBlocks.register(bus);
         AvarusItems.register(bus);
 

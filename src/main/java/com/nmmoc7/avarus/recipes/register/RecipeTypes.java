@@ -1,6 +1,9 @@
-package com.nmmoc7.avarus.recipes;
+package com.nmmoc7.avarus.recipes.register;
 
 import com.nmmoc7.avarus.Avarus;
+import com.nmmoc7.avarus.recipes.PlateRecipe;
+import com.nmmoc7.avarus.recipes.ToolTypeRecipe;
+import com.nmmoc7.avarus.recipes.base.BaseRecipe;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeType;

@@ -1,6 +1,6 @@
 package com.nmmoc7.avarus.datagen.recipes;
 
-import com.nmmoc7.avarus.recipes.BaseRecipe;
+import com.nmmoc7.avarus.recipes.base.BaseRecipe;
 import com.nmmoc7.avarus.utils.json.JsonUtils;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
@@ -16,11 +16,12 @@ public abstract class AvarusRecipes {
 
     protected abstract void addRecipes();
 
-    protected void addRecipe(ResourceLocation name, String recipe, String subPath) {
+    protected final void addRecipe(ResourceLocation name, String recipe, String subPath) {
         recipes.put(name, new HashMap.SimpleEntry<>(recipe, subPath));
     }
 
     public Map<ResourceLocation, Map.Entry<String, String>> getRecipes() {
+        addRecipes();
         return recipes;
     }
 

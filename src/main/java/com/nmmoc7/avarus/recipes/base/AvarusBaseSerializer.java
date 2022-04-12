@@ -1,4 +1,4 @@
-package com.nmmoc7.avarus.recipes;
+package com.nmmoc7.avarus.recipes.base;
 
 import com.google.gson.JsonObject;
 import com.nmmoc7.avarus.utils.json.JsonUtils;

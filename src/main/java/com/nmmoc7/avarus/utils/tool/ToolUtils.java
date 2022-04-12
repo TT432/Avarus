@@ -1,7 +1,7 @@
 package com.nmmoc7.avarus.utils.tool;
 
 import com.nmmoc7.avarus.Avarus;
-import com.nmmoc7.avarus.recipes.RecipeTypes;
+import com.nmmoc7.avarus.recipes.register.RecipeTypes;
 import com.nmmoc7.avarus.recipes.ToolTypeRecipe;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;

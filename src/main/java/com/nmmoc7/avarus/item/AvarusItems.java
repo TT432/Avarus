@@ -2,10 +2,13 @@ package com.nmmoc7.avarus.item;
 
 import com.nmmoc7.avarus.Avarus;
 import com.nmmoc7.avarus.block.AvarusBlocks;
+import com.nmmoc7.avarus.fluids.AvarusFluids;
 import com.nmmoc7.avarus.item.debug.ClearBlockItem;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -55,6 +58,11 @@ public class AvarusItems {
     public static final RegistryObject<Item> COPPER_PLATE = ITEMS.register("copper_plate",
             () -> new Item(defaultProperties()));
 
+    // wires
+
+    public static final RegistryObject<Item> COPPER_WIRE = ITEMS.register("copper_wire",
+            () -> new Item(defaultProperties()));
+
     // tools
 
     // hammers
@@ -67,6 +75,22 @@ public class AvarusItems {
 
     public static final RegistryObject<Item> NETHERITE_HAMMER = ITEMS.register("netherite_hammer",
             () -> new Item(defaultProperties().defaultDurability(8192)));
+
+    // buckets
+
+    public static final RegistryObject<Item> EMPTY_FLUID_UNIT = ITEMS.register("empty_fluid_unit",
+            () -> new BucketItem(() -> Fluids.EMPTY, defaultProperties()));
+
+    public static final RegistryObject<Item> WATER_STEAM_FLUID_UNIT = ITEMS.register("water_steam_fluid_unit",
+            () -> new BucketItem(AvarusFluids.WATER_STEAM, defaultProperties()));
+
+
+
+
+
+
+
+
 
 
     private static RegistryObject<Item> formBlock(String name, RegistryObject<Block> block, Item.Properties properties) {

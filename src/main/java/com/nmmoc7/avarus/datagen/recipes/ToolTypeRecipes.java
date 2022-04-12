@@ -1,7 +1,7 @@
 package com.nmmoc7.avarus.datagen.recipes;
 
 import com.nmmoc7.avarus.item.AvarusItems;
-import com.nmmoc7.avarus.recipes.RecipeSerializers;
+import com.nmmoc7.avarus.recipes.register.RecipeSerializers;
 import com.nmmoc7.avarus.recipes.ToolTypeRecipe;
 import com.nmmoc7.avarus.utils.tool.ToolUtils;
 import net.minecraft.resources.ResourceLocation;

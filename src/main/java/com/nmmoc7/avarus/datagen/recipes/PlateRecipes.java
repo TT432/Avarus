@@ -2,7 +2,7 @@ package com.nmmoc7.avarus.datagen.recipes;
 
 import com.nmmoc7.avarus.item.AvarusItems;
 import com.nmmoc7.avarus.recipes.PlateRecipe;
-import com.nmmoc7.avarus.recipes.RecipeSerializers;
+import com.nmmoc7.avarus.recipes.register.RecipeSerializers;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;

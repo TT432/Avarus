@@ -1,8 +1,8 @@
 package com.nmmoc7.avarus.utils;
 
-import com.nmmoc7.avarus.recipes.BaseRecipe;
+import com.nmmoc7.avarus.recipes.base.BaseRecipe;
 import com.nmmoc7.avarus.recipes.PlateRecipe;
-import com.nmmoc7.avarus.recipes.RecipeTypes;
+import com.nmmoc7.avarus.recipes.register.RecipeTypes;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;

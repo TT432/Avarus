@@ -1,6 +1,9 @@
-package com.nmmoc7.avarus.recipes;
+package com.nmmoc7.avarus.recipes.register;
 
 import com.nmmoc7.avarus.Avarus;
+import com.nmmoc7.avarus.recipes.PlateRecipe;
+import com.nmmoc7.avarus.recipes.ToolTypeRecipe;
+import com.nmmoc7.avarus.recipes.base.AvarusBaseSerializer;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;

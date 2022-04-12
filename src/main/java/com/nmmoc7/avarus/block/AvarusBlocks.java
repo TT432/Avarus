@@ -1,7 +1,9 @@
 package com.nmmoc7.avarus.block;
 
 import com.nmmoc7.avarus.Avarus;
+import com.nmmoc7.avarus.fluids.AvarusFluids;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
@@ -22,6 +24,15 @@ public class AvarusBlocks {
     public static final RegistryObject<Block> GREEN_DIRT = BLOCKS.register("green_dirt", () -> new Block(DIRT));
     public static final RegistryObject<Block> YELLOW_DIRT = BLOCKS.register("yellow_dirt", () -> new Block(DIRT));
     public static final RegistryObject<Block> BLUE_DIRT = BLOCKS.register("blue_dirt", () -> new Block(DIRT));
+
+    // fluids
+
+    public static final RegistryObject<LiquidBlock> WATER_STEAM = BLOCKS.register("water", () ->
+            new LiquidBlock(AvarusFluids.WATER_STEAM, defaultFluid()));
+
+    protected static BlockBehaviour.Properties defaultFluid() {
+        return BlockBehaviour.Properties.of(Material.WATER).noCollission().strength(100.0F).noDrops();
+    }
 
     public static void register(IEventBus bus) {
         BLOCKS.register(bus);

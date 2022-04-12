@@ -2,6 +2,9 @@ package com.nmmoc7.avarus.recipes;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.nmmoc7.avarus.recipes.base.BaseRecipe;
+import com.nmmoc7.avarus.recipes.register.RecipeSerializers;
+import com.nmmoc7.avarus.recipes.register.RecipeTypes;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
