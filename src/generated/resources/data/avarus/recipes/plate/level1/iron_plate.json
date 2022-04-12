@@ -7,5 +7,6 @@
     "count": 1
   },
   "cost_per_hammer": 1,
-  "type": "avarus:plate_recipe_serializer"
+  "required_level": 1,
+  "type": "avarus:plate"
 }

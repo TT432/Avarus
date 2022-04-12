@@ -3,7 +3,6 @@ package com.nmmoc7.avarus.item;
 import com.nmmoc7.avarus.Avarus;
 import com.nmmoc7.avarus.block.AvarusBlocks;
 import com.nmmoc7.avarus.item.debug.ClearBlockItem;
-import com.nmmoc7.avarus.item.tools.HammerItem;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -35,8 +34,17 @@ public class AvarusItems {
     public static final RegistryObject<Item> COLORFUL_POWDER = ITEMS.register("colorful_powder",
             () -> new Item(defaultProperties()));
 
+    // alloys
+
     public static final RegistryObject<Item> COLORFUL_ALLOY = ITEMS.register("colorful_alloy",
             () -> new Item(defaultProperties()));
+
+    // ingot
+
+    public static final RegistryObject<Item> COLORFUL_ALLOY_INGOT = ITEMS.register("colorful_alloy_ingot",
+            () -> new Item(defaultProperties()));
+
+    // plates
 
     public static final RegistryObject<Item> IRON_PLATE = ITEMS.register("iron_plate",
             () -> new Item(defaultProperties()));
@@ -44,15 +52,21 @@ public class AvarusItems {
     public static final RegistryObject<Item> COLORFUL_ALLOY_PLATE = ITEMS.register("colorful_alloy_plate",
             () -> new Item(defaultProperties()));
 
+    public static final RegistryObject<Item> COPPER_PLATE = ITEMS.register("copper_plate",
+            () -> new Item(defaultProperties()));
+
     // tools
 
     // hammers
 
     public static final RegistryObject<Item> IRON_HAMMER = ITEMS.register("iron_hammer",
-            () -> new HammerItem(1, defaultProperties().defaultDurability(512)));
+            () -> new Item(defaultProperties().defaultDurability(512)));
 
     public static final RegistryObject<Item> COLORFUL_ALLOY_HAMMER = ITEMS.register("colorful_alloy_hammer",
-            () -> new HammerItem(2, defaultProperties().defaultDurability(2048)));
+            () -> new Item( defaultProperties().defaultDurability(2048)));
+
+    public static final RegistryObject<Item> NETHERITE_HAMMER = ITEMS.register("netherite_hammer",
+            () -> new Item(defaultProperties().defaultDurability(8192)));
 
 
     private static RegistryObject<Item> formBlock(String name, RegistryObject<Block> block, Item.Properties properties) {

@@ -14,7 +14,8 @@ import net.minecraftforge.registries.RegistryObject;
 public class RecipeTypes {
     private static final DeferredRegister<RecipeType<?>> TYPES = DeferredRegister.create(Registry.RECIPE_TYPE.key(), Avarus.MOD_ID);
 
-    public static RegistryObject<RecipeType<PlateRecipe>> plate = register("plate_recipe");
+    public static final RegistryObject<RecipeType<PlateRecipe>> PLATE = register("plate_recipe");
+    public static final RegistryObject<RecipeType<ToolTypeRecipe>> TOOL_TYPE = register("tool_type");
 
     private static <TYPE extends BaseRecipe<TYPE>> RegistryObject<RecipeType<TYPE>> register(String name) {
         return TYPES.register(name, () -> new RecipeType<>() {

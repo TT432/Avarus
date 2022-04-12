@@ -48,4 +48,14 @@ public abstract class BaseRecipe<SELF extends BaseRecipe<SELF>> implements Recip
     private SELF self() {
         return (SELF) this;
     }
+
+    @Override
+    public int hashCode() {
+        return id.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof BaseRecipe recipe && recipe.id.equals(id);
+    }
 }

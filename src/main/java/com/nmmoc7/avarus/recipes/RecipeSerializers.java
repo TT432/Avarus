@@ -15,11 +15,10 @@ public class RecipeSerializers {
             DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, Avarus.MOD_ID);
 
     public static final RegistryObject<AvarusBaseSerializer<?>> PLATE_RECIPE =
-            SERIALIZER.register(name("plate"), () -> new AvarusBaseSerializer<>(PlateRecipe.class));
+            SERIALIZER.register("plate", () -> new AvarusBaseSerializer<>(PlateRecipe.class));
 
-    private static String name(String name) {
-        return name + "_recipe_serializer";
-    }
+    public static final RegistryObject<AvarusBaseSerializer<?>> TOOL_TYPE_RECIPE =
+            SERIALIZER.register("tool_type", () -> new AvarusBaseSerializer<>(ToolTypeRecipe.class));
 
     public static void register(IEventBus bus) {
         SERIALIZER.register(bus);

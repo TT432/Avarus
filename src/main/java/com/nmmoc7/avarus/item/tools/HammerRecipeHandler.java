@@ -2,8 +2,9 @@ package com.nmmoc7.avarus.item.tools;
 
 import com.nmmoc7.avarus.item.AvarusItemTags;
 import com.nmmoc7.avarus.recipes.PlateRecipe;
-import com.nmmoc7.avarus.recipes.RecipeTypes;
+import com.nmmoc7.avarus.recipes.ToolTypeRecipe;
 import com.nmmoc7.avarus.utils.AvarusRecipeUtils;
+import com.nmmoc7.avarus.utils.tool.ToolUtils;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -44,20 +45,28 @@ public class HammerRecipeHandler {
             int damage = left.getDamageValue();
             int maxDamage = left.getMaxDamage();
 
-            PlateRecipe recipe = AvarusRecipeUtils.getRecipe(player.level, RecipeTypes.plate.get(), Collections.singletonList(right));
+            ToolTypeRecipe toolInfo = ToolUtils.INSTANCE.getToolInfo(player.level, left.getItem());
+
+            if (!toolInfo.toolType.equals(ToolUtils.HAMMER_TOOL_TYPE.toString())) {
+                return;
+            }
+
+            PlateRecipe recipe = AvarusRecipeUtils.getPlateRecipe(player.level, toolInfo.level, Collections.singletonList(right));
 
             if (recipe == null) {
                 return;
             }
 
-            if (maxDamage - damage < right.getCount() * recipe.costPerHammer) {
+            int cost = right.getCount() * recipe.costPerHammer;
+
+            if (maxDamage - damage < cost) {
                 return;
             }
 
             result = new ItemStack(recipe.output.getItem(), right.getCount() * recipe.output.getCount());
 
             ItemStack result = left.copy();
-            result.setDamageValue(damage + (right.getCount() * recipe.costPerHammer));
+            result.setDamageValue(damage + cost);
 
             if (maxDamage - result.getDamageValue() <= 1) {
                 needRemove = true;

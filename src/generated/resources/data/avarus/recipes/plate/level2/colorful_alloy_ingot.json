@@ -1,0 +1,12 @@
+{
+  "input": {
+    "item": "avarus:colorful_alloy"
+  },
+  "output": {
+    "item": "avarus:colorful_alloy_ingot",
+    "count": 1
+  },
+  "cost_per_hammer": 2,
+  "required_level": 2,
+  "type": "avarus:plate"
+}

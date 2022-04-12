@@ -1,0 +1,12 @@
+{
+  "input": {
+    "item": "minecraft:copper_ingot"
+  },
+  "output": {
+    "item": "avarus:copper_plate",
+    "count": 1
+  },
+  "cost_per_hammer": 1,
+  "required_level": 1,
+  "type": "avarus:plate"
+}
