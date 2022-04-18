@@ -4,6 +4,9 @@ import com.nmmoc7.avarus.Avarus;
 import com.nmmoc7.avarus.block.AvarusBlocks;
 import com.nmmoc7.avarus.fluids.AvarusFluids;
 import com.nmmoc7.avarus.item.debug.ClearBlockItem;
+import com.nmmoc7.avarus.item.machine.BlueprintItem;
+import com.nmmoc7.avarus.item.machine.ColorfulHammerItem;
+import com.nmmoc7.avarus.machine.AvarusMachineTypes;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.Item;
@@ -63,6 +66,11 @@ public class AvarusItems {
     public static final RegistryObject<Item> COPPER_WIRE = ITEMS.register("copper_wire",
             () -> new Item(defaultProperties()));
 
+    // gear
+
+    public static final RegistryObject<Item> COPPER_GEAR = ITEMS.register("copper_gear",
+            () -> new Item(defaultProperties()));
+
     // tools
 
     // hammers
@@ -71,7 +79,7 @@ public class AvarusItems {
             () -> new Item(defaultProperties().defaultDurability(512)));
 
     public static final RegistryObject<Item> COLORFUL_ALLOY_HAMMER = ITEMS.register("colorful_alloy_hammer",
-            () -> new Item( defaultProperties().defaultDurability(2048)));
+            () -> new ColorfulHammerItem(defaultProperties().defaultDurability(2048)));
 
     public static final RegistryObject<Item> NETHERITE_HAMMER = ITEMS.register("netherite_hammer",
             () -> new Item(defaultProperties().defaultDurability(8192)));
@@ -84,6 +92,21 @@ public class AvarusItems {
     public static final RegistryObject<Item> WATER_STEAM_FLUID_UNIT = ITEMS.register("water_steam_fluid_unit",
             () -> new BucketItem(AvarusFluids.WATER_STEAM, defaultProperties()));
 
+    public static final RegistryObject<Item> WATER_FLUID_UNIT = ITEMS.register("water_fluid_unit",
+            () -> new BucketItem(Fluids.WATER, defaultProperties()));
+
+    // machine
+
+    public static final RegistryObject<Item> MULTI_BLOCK_MACHINE_CORE = formBlock("multi_block_machine_core",
+            AvarusBlocks.MULTI_BLOCK_MACHINE_CORE, defaultProperties());
+
+    public static final RegistryObject<Item> MULTI_BLOCK_MACHINE_BODY = formBlock("multi_block_machine_body",
+            AvarusBlocks.MULTI_BLOCK_MACHINE_BODY, defaultProperties());
+
+    // blueprint
+
+    public static final RegistryObject<Item> TEST_BLUEPRINT = ITEMS.register("test_blueprint",
+            () -> new BlueprintItem<>("test", AvarusMachineTypes.TEST, defaultProperties()));
 
 
 
@@ -92,8 +115,7 @@ public class AvarusItems {
 
 
 
-
-    private static RegistryObject<Item> formBlock(String name, RegistryObject<Block> block, Item.Properties properties) {
+    private static RegistryObject<Item> formBlock(String name, RegistryObject<? extends Block> block, Item.Properties properties) {
         return ITEMS.register(name, () -> new BlockItem(block.get(), properties));
     }
 

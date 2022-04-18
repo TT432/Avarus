@@ -18,6 +18,8 @@ public class StoneCuttingRecipes extends AvarusRecipes {
         addRecipe(2, Ingredient.of(AvarusItems.COPPER_PLATE.get()), AvarusItems.COPPER_WIRE.get(), 3);
 
         addRecipe(1, Ingredient.of(Items.COPPER_INGOT), AvarusItems.COPPER_PLATE.get(), 2);
+
+        addRecipe(1, Ingredient.of(Items.COPPER_INGOT), AvarusItems.COPPER_GEAR.get(), 2);
     }
 
     /**

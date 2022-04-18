@@ -2,6 +2,8 @@ package com.nmmoc7.avarus.block;
 
 import com.nmmoc7.avarus.Avarus;
 import com.nmmoc7.avarus.fluids.AvarusFluids;
+import com.nmmoc7.avarus.machine.multiblock.block.MultiBlockMachineBodyBlock;
+import com.nmmoc7.avarus.machine.multiblock.block.MultiBlockMachineCoreBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.SoundType;
@@ -29,6 +31,18 @@ public class AvarusBlocks {
 
     public static final RegistryObject<LiquidBlock> WATER_STEAM = BLOCKS.register("water", () ->
             new LiquidBlock(AvarusFluids.WATER_STEAM, defaultFluid()));
+
+    // machines
+
+    public static final RegistryObject<MultiBlockMachineCoreBlock> MULTI_BLOCK_MACHINE_CORE = BLOCKS.register("multi_block_machine_core", () ->
+            new MultiBlockMachineCoreBlock(BlockBehaviour.Properties.of(Material.METAL).strength(5.0F, 6.0F).sound(SoundType.METAL).noOcclusion()));
+
+    public static final RegistryObject<MultiBlockMachineBodyBlock> MULTI_BLOCK_MACHINE_BODY = BLOCKS.register("multi_block_machine_body", () ->
+            new MultiBlockMachineBodyBlock(BlockBehaviour.Properties.of(Material.METAL).strength(5.0F, 6.0F).sound(SoundType.METAL).noOcclusion()));
+
+
+
+
 
     protected static BlockBehaviour.Properties defaultFluid() {
         return BlockBehaviour.Properties.of(Material.WATER).noCollission().strength(100.0F).noDrops();

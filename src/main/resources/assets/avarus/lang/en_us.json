@@ -1,3 +1,4 @@
 {
-  "tool.avarus.hammer": "Tool: Hammer, Level: %d"
+  "tool.avarus.hammer": "Tool: Hammer, Level: %d",
+  "item.avarus.colorful_hammer.tooltip": "轻轻敲击机器核心以制造机器"
 }

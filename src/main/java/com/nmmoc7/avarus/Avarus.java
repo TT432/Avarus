@@ -1,10 +1,12 @@
 package com.nmmoc7.avarus;
 
 import com.nmmoc7.avarus.block.AvarusBlocks;
+import com.nmmoc7.avarus.blockentities.AvarusBlockEntityTypes;
 import com.nmmoc7.avarus.fluids.AvarusFluids;
 import com.nmmoc7.avarus.item.AvarusItems;
 import com.nmmoc7.avarus.item.tools.HammerRecipeHandler;
 import com.nmmoc7.avarus.item.tools.TooltipsHandler;
+import com.nmmoc7.avarus.machine.AvarusMachineTypes;
 import com.nmmoc7.avarus.recipes.register.RecipeSerializers;
 import com.nmmoc7.avarus.recipes.register.RecipeTypes;
 import com.nmmoc7.avarus.worldgen.AvarusRegion;
@@ -34,7 +36,9 @@ public class Avarus {
 
         AvarusFluids.register(bus);
         AvarusBlocks.register(bus);
+        AvarusBlockEntityTypes.register(bus);
         AvarusItems.register(bus);
+        AvarusMachineTypes.register(bus);
 
         RecipeSerializers.register(bus);
         RecipeTypes.register(bus);
