@@ -1,10 +1,12 @@
-package com.nmmoc7.avarus.machine.multiblock.render;
+package com.nmmoc7.avarus.client.renderers.machine;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Matrix4f;
-import com.nmmoc7.avarus.client.render.rendertype.AvarusRenderType;
+import com.nmmoc7.avarus.client.machine.api.MachineClient;
+import com.nmmoc7.avarus.client.machine.api.MachineClientRegistry;
+import com.nmmoc7.avarus.client.rendertype.AvarusRenderType;
 import com.nmmoc7.avarus.machine.api.IMachine;
 import com.nmmoc7.avarus.machine.multiblock.blockentities.MultiBlockMachineBlockEntity;
 import net.minecraft.client.Minecraft;
@@ -31,8 +33,19 @@ public class MultiBlockMachineBlockEntityRenderer implements BlockEntityRenderer
     @Override
     public void render(MultiBlockMachineBlockEntity blockEntity, float partialTick, PoseStack poseStack,
                        MultiBufferSource bufferSource, int packedLight, int packedOverlay) {
-        if (blockEntity.getMachine() != null && !blockEntity.isCreated()) {
-            renderBodyLines(blockEntity, poseStack);
+        if (blockEntity.getMachine() != null) {
+            if (blockEntity.isCreated()) {
+                MachineClient<?> machineClient = MachineClientRegistry.getClient(blockEntity.getMachineType());
+
+                if (machineClient == null) {
+                    return;
+                }
+
+                machineClient.render(blockEntity, blockEntity.getMachine(), partialTick, poseStack, bufferSource, packedLight, packedOverlay);
+            }
+            else {
+                renderBodyLines(blockEntity, poseStack);
+            }
         }
     }
 

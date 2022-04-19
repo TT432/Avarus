@@ -21,4 +21,14 @@ public class MachineType<TYPE extends CapabilityProvider<TYPE> & IMachine<TYPE> 
     public Lazy<IMachine<TYPE>> newMachine() {
         return Lazy.of(provider);
     }
+
+    @Override
+    public int hashCode() {
+        return getRegistryName().hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj == this || (obj instanceof MachineType other && other.getRegistryName().equals(this.getRegistryName()));
+    }
 }

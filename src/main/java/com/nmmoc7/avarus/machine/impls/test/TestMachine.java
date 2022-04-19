@@ -13,21 +13,11 @@ public class TestMachine extends BaseMachine<TestMachine> {
     public TestMachine() {
         super(TestMachine.class, new String[][] {
                 """
-                
                 B
                 """.split("\n"),
                 """
-                
-                B
-                """.split("\n"),
-                """
-                B
                 C
-                """.split("\n"),
-                """
-                
-                B
-                """.split("\n"),
+                """.split("\n")
         });
     }
 

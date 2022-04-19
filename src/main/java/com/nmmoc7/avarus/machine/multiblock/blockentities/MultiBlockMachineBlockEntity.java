@@ -145,9 +145,17 @@ public class MultiBlockMachineBlockEntity extends BlockEntity implements ITickAb
             sync();
             needSync = false;
         }
+
+        if (getMachine() != null && created) {
+            getMachine().tick();
+        }
     }
 
     public boolean use(Player pPlayer, InteractionHand pHand) {
         return getMachine().onUse(pPlayer, pHand);
+    }
+
+    public MachineType<?> getMachineType() {
+        return machineType;
     }
 }

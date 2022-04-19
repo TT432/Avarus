@@ -1,7 +1,7 @@
 package com.nmmoc7.avarus.machine.setup;
 
 import com.nmmoc7.avarus.blockentities.AvarusBlockEntityTypes;
-import com.nmmoc7.avarus.machine.multiblock.render.MultiBlockMachineBlockEntityRenderer;
+import com.nmmoc7.avarus.client.renderers.machine.MultiBlockMachineBlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 
 /**

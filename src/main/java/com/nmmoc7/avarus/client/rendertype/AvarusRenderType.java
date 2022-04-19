@@ -1,4 +1,4 @@
-package com.nmmoc7.avarus.client.render.rendertype;
+package com.nmmoc7.avarus.client.rendertype;
 
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.VertexFormat;
