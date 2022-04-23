@@ -12,7 +12,7 @@ import javax.annotation.Nullable;
 /**
  * @author DustW
  **/
-public interface ITickAble {
+public interface TickAble {
     void tick();
 
     /**
@@ -20,16 +20,16 @@ public interface ITickAble {
      * @param <OTHER> getTicker提供的
      * @param <SELF> 自己
      */
-    static <OTHER extends BlockEntity, SELF extends BlockEntity & ITickAble> BlockEntityTicker<SELF> getTicker(Level level, BlockEntityType<SELF> self, BlockEntityType<OTHER> other) {
-        return level.isClientSide ? null : createTickerHelper(self, other, ITickAble::tick);
+    static <OTHER extends BlockEntity, SELF extends BlockEntity & TickAble> BlockEntityTicker<SELF> getTicker(Level level, BlockEntityType<SELF> self, BlockEntityType<OTHER> other) {
+        return level.isClientSide ? null : createTickerHelper(self, other, TickAble::tick);
     }
 
-    private static <SELF extends BlockEntity & ITickAble> void tick(Level level, BlockPos pos, BlockState state, SELF self) {
+    private static <SELF extends BlockEntity & TickAble> void tick(Level level, BlockPos pos, BlockState state, SELF self) {
         self.tick();
     }
 
     @Nullable
-    private static <OTHER extends BlockEntity, SELF extends BlockEntity & ITickAble> BlockEntityTicker<SELF> createTickerHelper(BlockEntityType<SELF> type, BlockEntityType<OTHER> current, BlockEntityTicker<SELF> ticker) {
+    private static <OTHER extends BlockEntity, SELF extends BlockEntity & TickAble> BlockEntityTicker<SELF> createTickerHelper(BlockEntityType<SELF> type, BlockEntityType<OTHER> current, BlockEntityTicker<SELF> ticker) {
         return current == type ? ticker : null;
     }
 }

@@ -1,0 +1,8 @@
+{
+  "ingredient": {
+    "item": "minecraft:copper_ingot"
+  },
+  "result": "avarus:copper_gear",
+  "count": 2,
+  "type": "minecraft:stonecutting"
+}

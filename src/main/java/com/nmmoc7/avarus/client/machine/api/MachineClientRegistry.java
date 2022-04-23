@@ -1,6 +1,6 @@
 package com.nmmoc7.avarus.client.machine.api;
 
-import com.nmmoc7.avarus.machine.api.IMachine;
+import com.nmmoc7.avarus.machine.api.Machine;
 import com.nmmoc7.avarus.machine.api.MachineType;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraftforge.common.capabilities.CapabilityProvider;
@@ -16,7 +16,7 @@ import java.util.Map;
 public class MachineClientRegistry {
     private static final Map<MachineType<?>, MachineClient<?>> registry = new HashMap<>();
 
-    public static <TYPE extends CapabilityProvider<TYPE> & IMachine<TYPE> & INBTSerializable<CompoundTag>> void register(
+    public static <TYPE extends CapabilityProvider<TYPE> & Machine<TYPE> & INBTSerializable<CompoundTag>> void register(
             MachineType<TYPE> machineType,
             MachineClient<TYPE> machineClient
     ) {
@@ -28,7 +28,7 @@ public class MachineClientRegistry {
     }
 
     @Nullable
-    public static <TYPE extends CapabilityProvider<TYPE> & IMachine<TYPE> & INBTSerializable<CompoundTag>> MachineClient<TYPE> getClient(
+    public static <TYPE extends CapabilityProvider<TYPE> & Machine<TYPE> & INBTSerializable<CompoundTag>> MachineClient<TYPE> getClient(
             MachineType<TYPE> machineType
     ) {
         try {

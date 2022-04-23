@@ -1,6 +1,6 @@
 package com.nmmoc7.avarus.machine.impls;
 
-import com.nmmoc7.avarus.machine.api.IMachine;
+import com.nmmoc7.avarus.machine.api.Machine;
 import com.nmmoc7.avarus.machine.multiblock.blockentities.MultiBlockMachineBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -16,11 +16,13 @@ import java.util.stream.Collectors;
 /**
  * @author DustW
  **/
-public class BaseMachine<SELF extends CapabilityProvider<SELF> & IMachine<SELF> & INBTSerializable<CompoundTag>> extends CapabilityProvider<SELF> implements IMachine<SELF>, INBTSerializable<CompoundTag>{
+public class BaseMachine<SELF extends CapabilityProvider<SELF> & Machine<SELF> & INBTSerializable<CompoundTag>> extends CapabilityProvider<SELF> implements Machine<SELF>, INBTSerializable<CompoundTag>{
     private List<BlockPos> blocks = new ArrayList<>();
     private BlockPos core;
+    private MultiBlockMachineBlockEntity blockEntity;
+    private boolean needSync;
 
-    protected BaseMachine(Class<SELF> baseClass, String[][] structure) {
+    protected BaseMachine(MultiBlockMachineBlockEntity blockEntity, Class<SELF> baseClass, String[][] structure) {
         super(baseClass);
 
         for (int y = 0; y < structure.length; y++) {
@@ -46,6 +48,8 @@ public class BaseMachine<SELF extends CapabilityProvider<SELF> & IMachine<SELF> 
 
         blocks = blocks.stream().map(pos -> pos.offset(core.multiply(-1))).collect(Collectors.toList());
         core = core.offset(core.multiply(-1));
+
+        this.blockEntity = blockEntity;
     }
 
     @Override
@@ -54,18 +58,38 @@ public class BaseMachine<SELF extends CapabilityProvider<SELF> & IMachine<SELF> 
     }
 
     @Override
+    public MultiBlockMachineBlockEntity getBlockEntity() {
+        return blockEntity;
+    }
+
+    @Override
     public BlockPos getCorePosition() {
         return core;
     }
 
     @Override
-    public void onCreate(MultiBlockMachineBlockEntity blockEntity, Player player) {
+    public void onCreate(Player player) {
 
     }
 
     @Override
     public void onDestroy() {
 
+    }
+
+    @Override
+    public void saveUpdateTag(CompoundTag tag) {
+
+    }
+
+    @Override
+    public void handleUpdateTag(CompoundTag tag) {
+
+    }
+
+    @Override
+    public boolean isNeedSync() {
+        return needSync;
     }
 
     @Override

@@ -1,6 +1,6 @@
 package com.nmmoc7.avarus.item.machine;
 
-import com.nmmoc7.avarus.machine.api.IMachine;
+import com.nmmoc7.avarus.machine.api.Machine;
 import com.nmmoc7.avarus.machine.api.MachineType;
 import com.nmmoc7.avarus.machine.multiblock.blockentities.MultiBlockMachineBlockEntity;
 import net.minecraft.core.BlockPos;
@@ -25,7 +25,7 @@ import java.util.function.Supplier;
 /**
  * @author DustW
  **/
-public class BlueprintItem<TYPE extends CapabilityProvider<TYPE> & IMachine<TYPE> & INBTSerializable<CompoundTag>> extends Item {
+public class BlueprintItem<TYPE extends CapabilityProvider<TYPE> & Machine<TYPE> & INBTSerializable<CompoundTag>> extends Item {
     Supplier<MachineType<TYPE>> machineType;
     String machineName;
 
