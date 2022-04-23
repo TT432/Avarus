@@ -3,9 +3,9 @@ package com.nmmoc7.avarus.machine.multiblock.blockentities;
 import com.nmmoc7.avarus.block.AvarusBlocks;
 import com.nmmoc7.avarus.blockentities.AvarusBlockEntityTypes;
 import com.nmmoc7.avarus.machine.AvarusMachineTypes;
-import com.nmmoc7.avarus.machine.api.IMachine;
+import com.nmmoc7.avarus.machine.api.Machine;
 import com.nmmoc7.avarus.machine.api.MachineType;
-import com.nmmoc7.avarus.utils.ITickAble;
+import com.nmmoc7.avarus.utils.TickAble;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -26,18 +26,22 @@ import org.jetbrains.annotations.Nullable;
 /**
  * @author DustW
  **/
-public class MultiBlockMachineBlockEntity extends BlockEntity implements ITickAble {
+public class MultiBlockMachineBlockEntity extends BlockEntity implements TickAble {
     public MultiBlockMachineBlockEntity(BlockPos pWorldPosition, BlockState pBlockState) {
         super(AvarusBlockEntityTypes.MULTI_BLOCK_MACHINE.get(), pWorldPosition, pBlockState);
     }
 
-    private Lazy<? extends IMachine<?>> machine;
+    private Lazy<? extends Machine<?>> machine;
     private MachineType<?> machineType;
     private boolean created;
 
     private boolean needSync;
 
-    public IMachine<?> getMachine() {
+    private boolean isNeedSync() {
+        return needSync || getMachine().isNeedSync();
+    }
+
+    public Machine<?> getMachine() {
         if (machine != null) {
             return machine.get();
         }
@@ -48,7 +52,7 @@ public class MultiBlockMachineBlockEntity extends BlockEntity implements ITickAb
     public void setMachine(MachineType<?> type) {
         if (!created) {
             machineType = type;
-            this.machine = type.newMachine();
+            this.machine = type.newMachine(this);
             needSync = true;
         }
     }
@@ -64,7 +68,7 @@ public class MultiBlockMachineBlockEntity extends BlockEntity implements ITickAb
     }
 
     protected boolean canCreate() {
-        return !isCreated() && getMachine().canCreate(this);
+        return !isCreated() && getMachine().canCreate();
     }
 
     public boolean create(Player player) {
@@ -78,7 +82,7 @@ public class MultiBlockMachineBlockEntity extends BlockEntity implements ITickAb
             ((MultiBlockMachineBodyBlockEntity) level.getBlockEntity(pos)).setCore(this);
         });
 
-        getMachine().onCreate(this, player);
+        getMachine().onCreate(player);
         created = true;
 
         return true;
@@ -118,7 +122,7 @@ public class MultiBlockMachineBlockEntity extends BlockEntity implements ITickAb
         machineType = AvarusMachineTypes.REGISTRY.get().getValue(new ResourceLocation(pTag.getString("type")));
 
         if (machineType != null) {
-            this.machine = machineType.newMachine();
+            this.machine = machineType.newMachine(this);
             needSync = true;
             getMachine().self().deserializeNBT(pTag.getCompound("machineCaps"));
         }
@@ -136,14 +140,35 @@ public class MultiBlockMachineBlockEntity extends BlockEntity implements ITickAb
     public CompoundTag getUpdateTag() {
         CompoundTag result = new CompoundTag();
         saveAdditional(result);
+
+        CompoundTag machineUpdate = new CompoundTag();
+
+        if (getMachine() != null) {
+            getMachine().saveUpdateTag(machineUpdate);
+        }
+
+        result.put("machineUpdate", machineUpdate);
+
         return result;
     }
 
     @Override
+    public void handleUpdateTag(CompoundTag tag) {
+        super.handleUpdateTag(tag);
+
+        if (getMachine() != null) {
+            getMachine().handleUpdateTag(tag.getCompound("machineUpdate"));
+        }
+    }
+
+    @Override
     public void tick() {
-        if (needSync) {
+        if (isNeedSync()) {
             sync();
             needSync = false;
+            if (getMachine() != null) {
+                getMachine().setNeedSync(false);
+            }
         }
 
         if (getMachine() != null && created) {

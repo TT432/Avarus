@@ -1,9 +1,9 @@
 package com.nmmoc7.avarus.machine.multiblock.blockentities;
 
 import com.nmmoc7.avarus.blockentities.AvarusBlockEntityTypes;
-import com.nmmoc7.avarus.machine.api.IMachine;
+import com.nmmoc7.avarus.machine.api.Machine;
 import com.nmmoc7.avarus.utils.CompoundTagUtils;
-import com.nmmoc7.avarus.utils.ITickAble;
+import com.nmmoc7.avarus.utils.TickAble;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.InteractionHand;
@@ -14,7 +14,7 @@ import net.minecraft.world.level.block.state.BlockState;
 /**
  * @author DustW
  **/
-public class MultiBlockMachineBodyBlockEntity extends BlockEntity implements ITickAble {
+public class MultiBlockMachineBodyBlockEntity extends BlockEntity implements TickAble {
     public MultiBlockMachineBodyBlockEntity(BlockPos pWorldPosition, BlockState pBlockState) {
         super(AvarusBlockEntityTypes.MULTI_BLOCK_MACHINE_BODY.get(), pWorldPosition, pBlockState);
     }
@@ -22,7 +22,7 @@ public class MultiBlockMachineBodyBlockEntity extends BlockEntity implements ITi
     MultiBlockMachineBlockEntity core;
     BlockPos corePos;
 
-    protected IMachine<?> getMachine() {
+    protected Machine<?> getMachine() {
         return core.getMachine();
     }
 

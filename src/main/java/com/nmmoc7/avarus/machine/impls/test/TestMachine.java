@@ -10,8 +10,8 @@ import net.minecraft.world.entity.player.Player;
  * @author DustW
  **/
 public class TestMachine extends BaseMachine<TestMachine> {
-    public TestMachine() {
-        super(TestMachine.class, new String[][] {
+    public TestMachine(MultiBlockMachineBlockEntity blockEntity) {
+        super(blockEntity, TestMachine.class, new String[][] {
                 """
                 B
                 """.split("\n"),
@@ -22,8 +22,8 @@ public class TestMachine extends BaseMachine<TestMachine> {
     }
 
     @Override
-    public void onCreate(MultiBlockMachineBlockEntity blockEntity, Player player) {
-        player.sendMessage(new TextComponent("Machine created!"), player.getUUID());
+    public void onCreate(Player player) {
+        player.displayClientMessage(new TextComponent("Machine created!"), false);
     }
 
     @Override

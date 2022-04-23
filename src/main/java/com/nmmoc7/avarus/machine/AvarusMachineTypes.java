@@ -1,7 +1,8 @@
 package com.nmmoc7.avarus.machine;
 
 import com.nmmoc7.avarus.Avarus;
-import com.nmmoc7.avarus.machine.api.IMachine;
+import com.nmmoc7.avarus.machine.api.Machine;
+import com.nmmoc7.avarus.machine.api.MachineCreator;
 import com.nmmoc7.avarus.machine.api.MachineType;
 import com.nmmoc7.avarus.machine.impls.test.TestMachine;
 import net.minecraft.nbt.CompoundTag;
@@ -25,11 +26,11 @@ public class AvarusMachineTypes {
 
     public static final RegistryObject<MachineType<TestMachine>> TEST = register("test", TestMachine::new);
 
-    private static <TYPE extends CapabilityProvider<TYPE> & IMachine<TYPE> & INBTSerializable<CompoundTag>> RegistryObject<MachineType<TYPE>> register(
+    private static <TYPE extends CapabilityProvider<TYPE> & Machine<TYPE> & INBTSerializable<CompoundTag>> RegistryObject<MachineType<TYPE>> register(
             String name,
-            Supplier<IMachine<TYPE>> machineSupplier
+            MachineCreator<TYPE> machineCreator
     ) {
-        return TYPES.register(name, () -> new MachineType<>(machineSupplier));
+        return TYPES.register(name, () -> new MachineType<>(machineCreator));
     }
 
     public static Supplier<IForgeRegistry<MachineType<?>>> REGISTRY;

@@ -1,7 +1,7 @@
 package com.nmmoc7.avarus.client.machine.api;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.nmmoc7.avarus.machine.api.IMachine;
+import com.nmmoc7.avarus.machine.api.Machine;
 import com.nmmoc7.avarus.machine.multiblock.blockentities.MultiBlockMachineBlockEntity;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.nbt.CompoundTag;
@@ -13,12 +13,12 @@ import javax.annotation.Nullable;
 /**
  * @author DustW
  **/
-public abstract class MachineClient<TYPE extends CapabilityProvider<TYPE> & IMachine<TYPE> & INBTSerializable<CompoundTag>> {
+public abstract class MachineClient<TYPE extends CapabilityProvider<TYPE> & Machine<TYPE> & INBTSerializable<CompoundTag>> {
     public abstract void render(MultiBlockMachineBlockEntity blockEntity, TYPE machine, float partialTick, PoseStack poseStack,
                                 MultiBufferSource bufferSource, int packedLight, int packedOverlay);
 
-    public final void render(MultiBlockMachineBlockEntity blockEntity, IMachine<?> machine, float partialTick, PoseStack poseStack,
-                                MultiBufferSource bufferSource, int packedLight, int packedOverlay) {
+    public final void render(MultiBlockMachineBlockEntity blockEntity, Machine<?> machine, float partialTick, PoseStack poseStack,
+                             MultiBufferSource bufferSource, int packedLight, int packedOverlay) {
         if (cast(machine) == null) {
             return;
         }
@@ -27,7 +27,7 @@ public abstract class MachineClient<TYPE extends CapabilityProvider<TYPE> & IMac
     }
 
     @Nullable
-    protected final TYPE cast(IMachine<?> machine) {
+    protected final TYPE cast(Machine<?> machine) {
         try {
             return (TYPE) machine;
         }

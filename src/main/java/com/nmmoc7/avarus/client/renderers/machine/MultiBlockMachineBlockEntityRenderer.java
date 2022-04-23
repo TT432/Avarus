@@ -7,7 +7,7 @@ import com.mojang.math.Matrix4f;
 import com.nmmoc7.avarus.client.machine.api.MachineClient;
 import com.nmmoc7.avarus.client.machine.api.MachineClientRegistry;
 import com.nmmoc7.avarus.client.rendertype.AvarusRenderType;
-import com.nmmoc7.avarus.machine.api.IMachine;
+import com.nmmoc7.avarus.machine.api.Machine;
 import com.nmmoc7.avarus.machine.multiblock.blockentities.MultiBlockMachineBlockEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -69,9 +69,9 @@ public class MultiBlockMachineBlockEntityRenderer implements BlockEntityRenderer
 
         Matrix4f matrix = matrixStack.last().pose();
 
-        IMachine<?> machine = core.getMachine();
+        Machine<?> machine = core.getMachine();
 
-        boolean red = !machine.canCreate(core);
+        boolean red = !machine.canCreate();
 
         List<BlockPos> list = new ArrayList<>(machine.bodyPositions());
         list.add(machine.getCorePosition());

@@ -2,7 +2,7 @@ package com.nmmoc7.avarus.machine.multiblock.block;
 
 import com.nmmoc7.avarus.blockentities.AvarusBlockEntityTypes;
 import com.nmmoc7.avarus.machine.multiblock.blockentities.MultiBlockMachineBodyBlockEntity;
-import com.nmmoc7.avarus.utils.ITickAble;
+import com.nmmoc7.avarus.utils.TickAble;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -20,12 +20,11 @@ import org.jetbrains.annotations.Nullable;
 /**
  * @author DustW
  **/
-public class MultiBlockMachineBodyBlock extends BaseEntityBlock {
+public final class MultiBlockMachineBodyBlock extends BaseEntityBlock {
     public MultiBlockMachineBodyBlock(Properties p_49795_) {
         super(p_49795_);
     }
 
-    @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         return new MultiBlockMachineBodyBlockEntity(pos, state);
@@ -56,6 +55,6 @@ public class MultiBlockMachineBodyBlock extends BaseEntityBlock {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-        return (BlockEntityTicker<T>) ITickAble.getTicker(pLevel, AvarusBlockEntityTypes.MULTI_BLOCK_MACHINE_BODY.get(), pBlockEntityType);
+        return (BlockEntityTicker<T>) TickAble.getTicker(pLevel, AvarusBlockEntityTypes.MULTI_BLOCK_MACHINE_BODY.get(), pBlockEntityType);
     }
 }
