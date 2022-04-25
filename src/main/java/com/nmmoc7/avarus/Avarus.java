@@ -6,6 +6,7 @@ import com.nmmoc7.avarus.fluids.AvarusFluids;
 import com.nmmoc7.avarus.item.AvarusItems;
 import com.nmmoc7.avarus.item.tools.HammerRecipeHandler;
 import com.nmmoc7.avarus.item.tools.TooltipsHandler;
+import com.nmmoc7.avarus.machine.AvarusMachineIoTypes;
 import com.nmmoc7.avarus.machine.AvarusMachineTypes;
 import com.nmmoc7.avarus.recipes.register.RecipeSerializers;
 import com.nmmoc7.avarus.recipes.register.RecipeTypes;
@@ -39,6 +40,7 @@ public class Avarus {
         AvarusBlockEntityTypes.register(bus);
         AvarusItems.register(bus);
         AvarusMachineTypes.register(bus);
+        AvarusMachineIoTypes.register(bus);
 
         RecipeSerializers.register(bus);
         RecipeTypes.register(bus);

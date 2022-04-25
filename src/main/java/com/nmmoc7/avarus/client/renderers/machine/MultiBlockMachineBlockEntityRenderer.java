@@ -73,7 +73,7 @@ public class MultiBlockMachineBlockEntityRenderer implements BlockEntityRenderer
 
         boolean red = !machine.canCreate();
 
-        List<BlockPos> list = new ArrayList<>(machine.bodyPositions());
+        List<BlockPos> list = new ArrayList<>(machine.bodyPositions().keySet());
         list.add(machine.getCorePosition());
 
         for (BlockPos pos : list) {

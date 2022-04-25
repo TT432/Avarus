@@ -1,22 +1,21 @@
-package com.nmmoc7.avarus.machine.io.impl;
+package com.nmmoc7.avarus.machine.io;
 
-import com.nmmoc7.avarus.machine.io.MachineIoType;
+import com.nmmoc7.avarus.machine.api.MachineIo;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.ItemStackHandler;
 
 /**
  * @author DustW
  **/
-public class ItemStackMachineIoType implements MachineIoType<ItemStack, Integer> {
-    private final IItemHandler itemHandler;
-
-    public ItemStackMachineIoType(IItemHandler itemHandler) {
-        this.itemHandler = itemHandler;
+public class ItemStackMachineIo extends ItemStackHandler implements MachineIo<ItemStack, Integer> {
+    public ItemStackMachineIo() {
+        super(16);
     }
 
     public IItemHandler getItemHandler() {
-        return itemHandler;
+        return this;
     }
 
     @Override

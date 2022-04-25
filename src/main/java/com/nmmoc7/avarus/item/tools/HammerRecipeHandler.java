@@ -15,8 +15,9 @@ import net.minecraftforge.event.AnvilUpdateEvent;
 import net.minecraftforge.event.entity.player.AnvilRepairEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
-import javax.annotation.Nonnull;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author DustW
@@ -26,9 +27,8 @@ public class HammerRecipeHandler {
         MinecraftForge.EVENT_BUS.register(this);
     }
 
-    @Nonnull
-    ItemStack result = ItemStack.EMPTY;
-    boolean needRemove;
+    Map<Player, ItemStack> result = new HashMap<>();
+    Map<Player, Boolean> needRemove = new HashMap<>();
 
     @SubscribeEvent
     public void hammer(AnvilUpdateEvent event) {
@@ -63,13 +63,13 @@ public class HammerRecipeHandler {
                 return;
             }
 
-            result = new ItemStack(recipe.output.getItem(), right.getCount() * recipe.output.getCount());
+            result.put(player, new ItemStack(recipe.output.getItem(), right.getCount() * recipe.output.getCount()));
 
             ItemStack result = left.copy();
             result.setDamageValue(damage + cost);
 
             if (maxDamage - result.getDamageValue() <= 1) {
-                needRemove = true;
+                needRemove.put(player, true);
             }
 
             event.setOutput(result);
@@ -85,6 +85,8 @@ public class HammerRecipeHandler {
             return;
         }
 
+        ItemStack result = this.result.get(player);
+
         if (!result.isEmpty()) {
             event.setBreakChance(0);
 
@@ -98,13 +100,15 @@ public class HammerRecipeHandler {
 
             player.giveExperienceLevels(1);
 
+            boolean needRemove = this.needRemove.get(player);
+
             if (needRemove) {
                 player.level.playSound(player, player, SoundEvents.ITEM_BREAK, SoundSource.PLAYERS, 1.0F, 1.0F);
                 event.getItemResult().shrink(1);
-                needRemove = false;
+                this.needRemove.put(player, false);
             }
 
-            result = ItemStack.EMPTY;
+            this.result.put(player, ItemStack.EMPTY);
         }
     }
 }

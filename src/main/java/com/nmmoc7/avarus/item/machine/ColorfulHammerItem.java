@@ -26,6 +26,7 @@ public class ColorfulHammerItem extends Item {
     @Override
     public InteractionResult useOn(UseOnContext pContext) {
         Level level = pContext.getLevel();
+
         BlockPos pos = pContext.getClickedPos();
 
         BlockEntity blockEntity = level.getBlockEntity(pos);

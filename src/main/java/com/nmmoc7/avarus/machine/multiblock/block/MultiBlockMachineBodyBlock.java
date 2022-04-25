@@ -55,6 +55,6 @@ public final class MultiBlockMachineBodyBlock extends BaseEntityBlock {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-        return (BlockEntityTicker<T>) TickAble.getTicker(pLevel, AvarusBlockEntityTypes.MULTI_BLOCK_MACHINE_BODY.get(), pBlockEntityType);
+        return TickAble.getTicker(pLevel, AvarusBlockEntityTypes.MULTI_BLOCK_MACHINE_BODY.get(), pBlockEntityType);
     }
 }

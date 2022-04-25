@@ -2,14 +2,17 @@ package com.nmmoc7.avarus.machine.multiblock.blockentities;
 
 import com.nmmoc7.avarus.blockentities.AvarusBlockEntityTypes;
 import com.nmmoc7.avarus.machine.api.Machine;
-import com.nmmoc7.avarus.utils.CompoundTagUtils;
 import com.nmmoc7.avarus.utils.TickAble;
 import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.util.LazyOptional;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * @author DustW
@@ -20,10 +23,9 @@ public class MultiBlockMachineBodyBlockEntity extends BlockEntity implements Tic
     }
 
     MultiBlockMachineBlockEntity core;
-    BlockPos corePos;
 
     protected Machine<?> getMachine() {
-        return core.getMachine();
+        return getCore().getMachine();
     }
 
     public MultiBlockMachineBlockEntity getCore() {
@@ -34,28 +36,18 @@ public class MultiBlockMachineBodyBlockEntity extends BlockEntity implements Tic
         this.core = core;
     }
 
+    @NotNull
     @Override
-    public void tick() {
-        if (corePos != null && core == null) {
-            if (level.getBlockEntity(corePos) instanceof MultiBlockMachineBlockEntity core) {
-                this.core = core;
-            }
-        }
-    }
-
-    @Override
-    protected void saveAdditional(CompoundTag pTag) {
-        super.saveAdditional(pTag);
-        pTag.put("core", CompoundTagUtils.toTag(core.getBlockPos()));
-    }
-
-    @Override
-    public void load(CompoundTag pTag) {
-        super.load(pTag);
-        corePos = CompoundTagUtils.toPos(pTag.getCompound("core"));
+    public <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
+        return getMachine() != null ? getMachine().getCapability(cap, getBlockPos()) : LazyOptional.empty();
     }
 
     public boolean use(Player pPlayer, InteractionHand pHand) {
-        return core.use(pPlayer, pHand);
+        return getCore().use(pPlayer, pHand, getBlockPos());
+    }
+
+    @Override
+    public void tick() {
+
     }
 }

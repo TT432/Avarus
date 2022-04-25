@@ -1,9 +1,12 @@
-package com.nmmoc7.avarus.machine.io;
+package com.nmmoc7.avarus.machine.api;
+
+import net.minecraft.nbt.CompoundTag;
+import net.minecraftforge.common.util.INBTSerializable;
 
 /**
  * @author DustW
  **/
-public interface MachineIoType<TYPE, VALUE_TYPE> {
+public interface MachineIo<TYPE, VALUE_TYPE> extends INBTSerializable<CompoundTag> {
     /**
      * @return 返回 slot 的数量
      */

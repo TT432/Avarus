@@ -20,8 +20,9 @@ public interface TickAble {
      * @param <OTHER> getTicker提供的
      * @param <SELF> 自己
      */
-    static <OTHER extends BlockEntity, SELF extends BlockEntity & TickAble> BlockEntityTicker<SELF> getTicker(Level level, BlockEntityType<SELF> self, BlockEntityType<OTHER> other) {
-        return level.isClientSide ? null : createTickerHelper(self, other, TickAble::tick);
+    static <OTHER extends BlockEntity, SELF extends BlockEntity & TickAble, RETURN extends BlockEntityTicker<?>> RETURN
+        getTicker(Level level, BlockEntityType<SELF> self, BlockEntityType<OTHER> other) {
+            return (RETURN) createTickerHelper(self, other, TickAble::tick);
     }
 
     private static <SELF extends BlockEntity & TickAble> void tick(Level level, BlockPos pos, BlockState state, SELF self) {

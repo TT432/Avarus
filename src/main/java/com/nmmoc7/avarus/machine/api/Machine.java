@@ -5,10 +5,13 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
+import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityProvider;
 import net.minecraftforge.common.util.INBTSerializable;
+import net.minecraftforge.common.util.LazyOptional;
 
-import java.util.List;
+import javax.annotation.Nonnull;
+import java.util.Map;
 
 /**
  * 使用 machine 需要注册 machine type，详见 {@link com.nmmoc7.avarus.machine.AvarusMachineTypes}.
@@ -20,13 +23,22 @@ public interface Machine<SELF extends CapabilityProvider<SELF> & Machine<SELF> &
      * 用于在创建时自动在对应位置添加 body 方块
      * @return 相对位置列表
      */
-    List<BlockPos> bodyPositions();
+    Map<BlockPos, MachineIoType<?, ?, ?>> bodyPositions();
 
     /**
      * 用于获取 block entity
      * @return block entity
      */
     MultiBlockMachineBlockEntity getBlockEntity();
+
+    /**
+     * 使用坐标获取 capability
+     * @param cap capability
+     * @param pos body 的 pos
+     * @param <T> capability 的类型
+     * @return    符合条件返回具体内容，否则 LazyOptional#empty
+     */
+    <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nonnull BlockPos pos);
 
     /**
      * 获取核心方块的位置，计算偏移量
@@ -74,9 +86,10 @@ public interface Machine<SELF extends CapabilityProvider<SELF> & Machine<SELF> &
      * 在玩家 use 的时候调用
      * @param pPlayer 玩家
      * @param pHand   使用的手
+     * @param pos     使用的位置
      * @return        是否成功
      */
-    boolean onUse(Player pPlayer, InteractionHand pHand);
+    boolean onUse(Player pPlayer, InteractionHand pHand, BlockPos pos);
 
     void tick();
 
@@ -85,6 +98,7 @@ public interface Machine<SELF extends CapabilityProvider<SELF> & Machine<SELF> &
     }
 
     default boolean canCreate() {
-        return bodyPositions().stream().allMatch(pos -> getBlockEntity().getLevel().getBlockState(getBlockEntity().getBlockPos().offset(pos)).isAir());
+        return bodyPositions().keySet().stream().allMatch(pos ->
+                getBlockEntity().getLevel().getBlockState(getBlockEntity().getBlockPos().offset(pos)).isAir());
     }
 }

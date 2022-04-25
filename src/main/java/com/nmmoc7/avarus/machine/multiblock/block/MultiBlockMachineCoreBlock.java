@@ -36,7 +36,7 @@ public class MultiBlockMachineCoreBlock extends BaseEntityBlock {
         BlockEntity tile = pLevel.getBlockEntity(pPos);
 
         if (tile instanceof MultiBlockMachineBlockEntity core && core.isCreated()) {
-            if (core.use(pPlayer, pHand)) {
+            if (core.use(pPlayer, pHand, pPos)) {
                 return InteractionResult.SUCCESS;
             }
         }
@@ -56,6 +56,6 @@ public class MultiBlockMachineCoreBlock extends BaseEntityBlock {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-        return (BlockEntityTicker<T>) TickAble.getTicker(pLevel, AvarusBlockEntityTypes.MULTI_BLOCK_MACHINE.get(), pBlockEntityType);
+        return TickAble.getTicker(pLevel, AvarusBlockEntityTypes.MULTI_BLOCK_MACHINE.get(), pBlockEntityType);
     }
 }

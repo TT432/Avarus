@@ -8,6 +8,7 @@ import net.minecraftforge.common.util.Lazy;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
 /**
+ * 需要注册，详见: {@link com.nmmoc7.avarus.machine.AvarusMachineTypes}
  * @author DustW
  **/
 public class MachineType<TYPE extends CapabilityProvider<TYPE> & Machine<TYPE> & INBTSerializable<CompoundTag>> extends ForgeRegistryEntry<MachineType<?>> {

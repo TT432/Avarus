@@ -38,7 +38,7 @@ public class MultiBlockMachineBlockEntity extends BlockEntity implements TickAbl
     private boolean needSync;
 
     private boolean isNeedSync() {
-        return needSync || getMachine().isNeedSync();
+        return needSync || (getMachine() != null && getMachine().isNeedSync());
     }
 
     public Machine<?> getMachine() {
@@ -64,7 +64,7 @@ public class MultiBlockMachineBlockEntity extends BlockEntity implements TickAbl
     @NotNull
     @Override
     public <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
-        return getMachine().self().getCapability(cap, side);
+        return getMachine() != null ? getMachine().getCapability(cap, getBlockPos()) : LazyOptional.empty();
     }
 
     protected boolean canCreate() {
@@ -76,7 +76,7 @@ public class MultiBlockMachineBlockEntity extends BlockEntity implements TickAbl
             return false;
         }
 
-        getMachine().bodyPositions().forEach(pos -> {
+        getMachine().bodyPositions().keySet().forEach(pos -> {
             pos = pos.offset(getBlockPos());
             level.setBlock(pos, AvarusBlocks.MULTI_BLOCK_MACHINE_BODY.get().defaultBlockState(), 2);
             ((MultiBlockMachineBodyBlockEntity) level.getBlockEntity(pos)).setCore(this);
@@ -85,6 +85,8 @@ public class MultiBlockMachineBlockEntity extends BlockEntity implements TickAbl
         getMachine().onCreate(player);
         created = true;
 
+        needSync = true;
+
         return true;
     }
 
@@ -92,7 +94,7 @@ public class MultiBlockMachineBlockEntity extends BlockEntity implements TickAbl
         if (created) {
             getMachine().onDestroy();
 
-            for (BlockPos bodyPosition : getMachine().bodyPositions()) {
+            for (BlockPos bodyPosition : getMachine().bodyPositions().keySet()) {
                 level.removeBlock(bodyPosition.offset(getBlockPos()), false);
             }
 
@@ -104,19 +106,31 @@ public class MultiBlockMachineBlockEntity extends BlockEntity implements TickAbl
     protected void saveAdditional(CompoundTag pTag) {
         super.saveAdditional(pTag);
 
-        pTag.putBoolean("created", created);
-
-        if (machineType != null) {
-            pTag.putString("type", machineType.getRegistryName().toString());
-            CompoundTag machineCaps = getMachine() == null ? new CompoundTag() : getMachine().self().serializeNBT();
-            pTag.put("machineCaps", machineCaps);
-        }
+        writeMachineData(pTag);
     }
 
     @Override
     public void load(CompoundTag pTag) {
         super.load(pTag);
 
+        readMachineData(pTag);
+
+        if (getMachine() != null) {
+            getMachine().handleUpdateTag(pTag.getCompound("machineUpdate"));
+        }
+    }
+
+    protected void writeMachineData(CompoundTag pTag) {
+        pTag.putBoolean("created", created);
+
+        if (machineType != null) {
+            pTag.putString("type", machineType.getRegistryName().toString());
+            CompoundTag machineData = getMachine() == null ? new CompoundTag() : getMachine().self().serializeNBT();
+            pTag.put("machineData", machineData);
+        }
+    }
+
+    protected void readMachineData(CompoundTag pTag) {
         created = pTag.getBoolean("created");
 
         machineType = AvarusMachineTypes.REGISTRY.get().getValue(new ResourceLocation(pTag.getString("type")));
@@ -124,7 +138,7 @@ public class MultiBlockMachineBlockEntity extends BlockEntity implements TickAbl
         if (machineType != null) {
             this.machine = machineType.newMachine(this);
             needSync = true;
-            getMachine().self().deserializeNBT(pTag.getCompound("machineCaps"));
+            getMachine().self().deserializeNBT(pTag.getCompound("machineData"));
         }
     }
 
@@ -139,7 +153,8 @@ public class MultiBlockMachineBlockEntity extends BlockEntity implements TickAbl
     @Override
     public CompoundTag getUpdateTag() {
         CompoundTag result = new CompoundTag();
-        saveAdditional(result);
+
+        writeMachineData(result);
 
         CompoundTag machineUpdate = new CompoundTag();
 
@@ -153,22 +168,20 @@ public class MultiBlockMachineBlockEntity extends BlockEntity implements TickAbl
     }
 
     @Override
-    public void handleUpdateTag(CompoundTag tag) {
-        super.handleUpdateTag(tag);
-
-        if (getMachine() != null) {
-            getMachine().handleUpdateTag(tag.getCompound("machineUpdate"));
-        }
-    }
-
-    @Override
     public void tick() {
         if (isNeedSync()) {
             sync();
             needSync = false;
+
             if (getMachine() != null) {
                 getMachine().setNeedSync(false);
             }
+
+            getMachine().bodyPositions().keySet().forEach(pos -> {
+                if (getLevel().getBlockEntity(getBlockPos().offset(pos)) instanceof MultiBlockMachineBodyBlockEntity body) {
+                    body.setCore(this);
+                }
+            });
         }
 
         if (getMachine() != null && created) {
@@ -176,8 +189,8 @@ public class MultiBlockMachineBlockEntity extends BlockEntity implements TickAbl
         }
     }
 
-    public boolean use(Player pPlayer, InteractionHand pHand) {
-        return getMachine().onUse(pPlayer, pHand);
+    public boolean use(Player pPlayer, InteractionHand pHand, BlockPos pos) {
+        return getMachine().onUse(pPlayer, pHand, pos);
     }
 
     public MachineType<?> getMachineType() {
