@@ -5,7 +5,6 @@ import com.nmmoc7.avarus.blockentities.AvarusBlockEntityTypes;
 import com.nmmoc7.avarus.fluids.AvarusFluids;
 import com.nmmoc7.avarus.item.AvarusItems;
 import com.nmmoc7.avarus.item.tools.HammerRecipeHandler;
-import com.nmmoc7.avarus.item.tools.TooltipsHandler;
 import com.nmmoc7.avarus.machine.AvarusMachineIoTypes;
 import com.nmmoc7.avarus.machine.AvarusMachineTypes;
 import com.nmmoc7.avarus.recipes.register.RecipeSerializers;
@@ -46,7 +45,6 @@ public class Avarus {
         RecipeTypes.register(bus);
 
         new HammerRecipeHandler();
-        new TooltipsHandler();
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {

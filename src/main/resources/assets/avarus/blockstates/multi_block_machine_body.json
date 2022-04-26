@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "minecraft:block/air"
+      "model": "avarus:block/multi_block_machine_body"
     }
   }
 }

@@ -100,6 +100,10 @@ public class HammerRecipeHandler {
 
             player.giveExperienceLevels(1);
 
+            if (!needRemove.containsKey(player)) {
+                needRemove.put(player, false);
+            }
+
             boolean needRemove = this.needRemove.get(player);
 
             if (needRemove) {
