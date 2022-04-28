@@ -12,7 +12,7 @@ import java.util.Map;
  * @author DustW
  **/
 public abstract class AvarusRecipes {
-    private Map<ResourceLocation, Map.Entry<String, String>> recipes = new HashMap<>();
+    private final Map<ResourceLocation, Map.Entry<String, String>> recipes = new HashMap<>();
 
     protected abstract void addRecipes();
 

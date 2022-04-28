@@ -2,28 +2,29 @@ package com.nmmoc7.avarus.power;
 
 import net.minecraft.core.BlockPos;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author DustW
  **/
 public class PowerGraph {
-    final Map<BlockPos, PowerNode> posMap = new HashMap<>();
-    final Map<PowerNode, LinkedList<PowerNode>> powerNodes = new HashMap<>();
+    final Map<BlockPos, PowerNode> posMap = new LinkedHashMap<>();
+    final Map<BlockPos, LinkedList<BlockPos>> powerNodes = new HashMap<>();
 
     /** 添加一个点到图中 */
     public void addNode(PowerNode node) {
+        if (posMap.containsKey(node.pos)) {
+            throw new IllegalArgumentException("Node already exists");
+        }
+
         posMap.put(node.pos, node);
-        powerNodes.put(node, new LinkedList<>());
+        powerNodes.put(node.pos, new LinkedList<>());
     }
 
     /** 添加一个边到无向图中 */
     public void addEdge(PowerNode from, PowerNode to) {
-        powerNodes.get(from).add(to);
-        powerNodes.get(to).add(from);
+        powerNodes.get(from.pos).add(to.pos);
+        powerNodes.get(to.pos).add(from.pos);
     }
 
     /** 获取一个点 */
@@ -33,7 +34,7 @@ public class PowerGraph {
 
     /** 取消所有的 visited */
     public void clearVisited() {
-        for (PowerNode node : powerNodes.keySet()) {
+        for (PowerNode node : posMap.values()) {
             node.visited = false;
         }
     }
@@ -46,7 +47,9 @@ public class PowerGraph {
             nodes.add(node);
         }
 
-        for (PowerNode n : powerNodes.get(node)) {
+        for (BlockPos pos : powerNodes.get(node.pos)) {
+            PowerNode n = posMap.get(pos);
+
             if (!n.visited) {
                 findSendNodes(n, nodes);
             }
@@ -61,7 +64,9 @@ public class PowerGraph {
             nodes.add(node);
         }
 
-        for (PowerNode n : powerNodes.get(node)) {
+        for (BlockPos pos : powerNodes.get(node.pos)) {
+            PowerNode n = posMap.get(pos);
+
             if (!n.visited) {
                 findBothNodes(n, nodes);
             }

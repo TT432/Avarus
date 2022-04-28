@@ -11,10 +11,7 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.IItemHandler;
 
 import java.util.AbstractMap;
-import java.util.HashMap;
 import java.util.Map;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * @author DustW
@@ -28,9 +25,9 @@ public class TestMachine extends BaseMachine<TestMachine> {
                 """
                 CI
                 """.split("\n")
-        }, Stream.of(
+        }, Map.ofEntries(
                 new AbstractMap.SimpleEntry<>('I', AvarusMachineIoTypes.ITEM_STACK_IO.get())
-        ).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (a, b) -> b, HashMap::new)));
+        ));
     }
 
     @Override

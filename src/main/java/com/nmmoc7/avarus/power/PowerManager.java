@@ -1,5 +1,6 @@
 package com.nmmoc7.avarus.power;
 
+import com.nmmoc7.avarus.utils.json.JsonUtils;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
@@ -25,15 +26,13 @@ public class PowerManager extends SavedData {
         return graph;
     }
 
-    //todo: implement
     public static PowerManager read(CompoundTag tag) {
-        return null;
+        return JsonUtils.INSTANCE.noExpose.fromJson(tag.getString("manager"), PowerManager.class);
     }
 
-
-    //todo: implement
     @Override
-    public CompoundTag save(CompoundTag pCompoundTag) {
-        return null;
+    public CompoundTag save(CompoundTag tag) {
+        tag.putString("manager", JsonUtils.INSTANCE.noExpose.toJson(this));
+        return tag;
     }
 }
