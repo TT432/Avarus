@@ -7,10 +7,13 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.IItemHandler;
 
 import java.util.AbstractMap;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -28,6 +31,19 @@ public class TestMachine extends BaseMachine<TestMachine> {
         }, Map.ofEntries(
                 new AbstractMap.SimpleEntry<>('I', AvarusMachineIoTypes.ITEM_STACK_IO.get())
         ));
+    }
+
+    @Override
+    public List<ItemStack> getDropItems() {
+        List<ItemStack> list = new ArrayList<>();
+
+        getCache(AvarusMachineIoTypes.ITEM_STACK_IO.get()).ifPresent(handler -> {
+            for (int i = 0; i < handler.getSize(); i++) {
+                list.add(handler.getSlot(i));
+            }
+        });
+
+        return list;
     }
 
     @Override

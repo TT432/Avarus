@@ -13,7 +13,6 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
 
@@ -44,12 +43,12 @@ public final class MultiBlockMachineBodyBlock extends BaseEntityBlock {
     }
 
     @Override
-    public boolean onDestroyedByPlayer(BlockState state, Level level, BlockPos pos, Player player, boolean willHarvest, FluidState fluid) {
-        if (!level.isClientSide() && level.getBlockEntity(pos) instanceof MultiBlockMachineBodyBlockEntity body) {
-            body.getCore().onRemoved();
+    public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pIsMoving) {
+        if (!pState.is(pNewState.getBlock()) && !pLevel.isClientSide()) {
+            if (pLevel.getBlockEntity(pPos) instanceof MultiBlockMachineBodyBlockEntity body) {
+                body.getCore().onRemoved();
+            }
         }
-
-        return super.onDestroyedByPlayer(state, level, pos, player, willHarvest, fluid);
     }
 
     @Nullable

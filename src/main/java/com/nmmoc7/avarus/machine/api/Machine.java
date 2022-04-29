@@ -5,12 +5,14 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityProvider;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.common.util.LazyOptional;
 
 import javax.annotation.Nonnull;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -101,4 +103,6 @@ public interface Machine<SELF extends CapabilityProvider<SELF> & Machine<SELF> &
         return bodyPositions().keySet().stream().allMatch(pos ->
                 getBlockEntity().getLevel().getBlockState(getBlockEntity().getBlockPos().offset(pos)).isAir());
     }
+
+    List<ItemStack> getDropItems();
 }

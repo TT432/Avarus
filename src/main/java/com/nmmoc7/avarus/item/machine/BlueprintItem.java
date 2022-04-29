@@ -44,7 +44,7 @@ public class BlueprintItem<TYPE extends CapabilityProvider<TYPE> & Machine<TYPE>
 
         if (blockEntity instanceof MultiBlockMachineBlockEntity machineCore) {
             if (machineCore.getMachine() == null) {
-                machineCore.setMachine(machineType.get());
+                machineCore.setMachine(machineType.get(), new ItemStack(this));
             }
         }
 

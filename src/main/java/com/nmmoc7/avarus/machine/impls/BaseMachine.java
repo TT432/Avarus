@@ -12,13 +12,16 @@ import net.minecraft.nbt.Tag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityProvider;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.common.util.LazyOptional;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -78,6 +81,10 @@ public class BaseMachine<SELF extends CapabilityProvider<SELF> & Machine<SELF> &
 
     Map<MachineIoType<?, ?, ?>, LazyOptional<INBTSerializable<CompoundTag>>> capCache = new HashMap<>();
 
+    protected <T, V> LazyOptional<MachineIo<T, V>> getCache(MachineIoType<T, V, ?> ioType) {
+        return capCache.get(ioType) == null ? LazyOptional.empty() : capCache.get(ioType).cast();
+    }
+
     protected LazyOptional<INBTSerializable<CompoundTag>> getOrPut(MachineIoType<?, ?, ?> type) {
         if (capCache.get(type) == null) {
             capCache.put(type, type.create().cast());
@@ -131,6 +138,11 @@ public class BaseMachine<SELF extends CapabilityProvider<SELF> & Machine<SELF> &
     @Override
     public void tick() {
 
+    }
+
+    @Override
+    public List<ItemStack> getDropItems() {
+        return new ArrayList<>();
     }
 
     @Override

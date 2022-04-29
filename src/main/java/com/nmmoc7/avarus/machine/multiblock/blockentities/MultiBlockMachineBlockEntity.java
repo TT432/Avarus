@@ -12,8 +12,10 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -31,6 +33,7 @@ public class MultiBlockMachineBlockEntity extends BlockEntity implements TickAbl
         super(AvarusBlockEntityTypes.MULTI_BLOCK_MACHINE.get(), pWorldPosition, pBlockState);
     }
 
+    private ItemStack blueprint = ItemStack.EMPTY;
     private Lazy<? extends Machine<?>> machine;
     private MachineType<?> machineType;
     private boolean created;
@@ -49,10 +52,11 @@ public class MultiBlockMachineBlockEntity extends BlockEntity implements TickAbl
         return null;
     }
 
-    public void setMachine(MachineType<?> type) {
+    public void setMachine(MachineType<?> type, ItemStack blueprint) {
         if (!created) {
             machineType = type;
             this.machine = type.newMachine(this);
+            this.blueprint = blueprint;
             needSync = true;
         }
     }
@@ -99,6 +103,16 @@ public class MultiBlockMachineBlockEntity extends BlockEntity implements TickAbl
             }
 
             level.removeBlock(getBlockPos(), false);
+
+            getMachine().getDropItems().forEach(item -> Containers.dropItemStack(
+                    getLevel(),
+                    getBlockPos().getX(), getBlockPos().getY(), getBlockPos().getZ(),
+                    item
+            ));
+
+            BlockPos pos = getBlockPos();
+            Containers.dropItemStack(getLevel(), pos.getX(), pos.getY(), pos.getZ(), new ItemStack(getBlockState().getBlock()));
+            Containers.dropItemStack(getLevel(), pos.getX(), pos.getY(), pos.getZ(), blueprint);
         }
     }
 
@@ -107,6 +121,8 @@ public class MultiBlockMachineBlockEntity extends BlockEntity implements TickAbl
         super.saveAdditional(pTag);
 
         writeMachineData(pTag);
+
+        pTag.put("blueprint", blueprint.serializeNBT());
     }
 
     @Override
@@ -114,6 +130,10 @@ public class MultiBlockMachineBlockEntity extends BlockEntity implements TickAbl
         super.load(pTag);
 
         readMachineData(pTag);
+
+        if (pTag.contains("blueprint")) {
+            blueprint = ItemStack.of(pTag.getCompound("blueprint"));
+        }
 
         if (getMachine() != null) {
             getMachine().handleUpdateTag(pTag.getCompound("machineUpdate"));
