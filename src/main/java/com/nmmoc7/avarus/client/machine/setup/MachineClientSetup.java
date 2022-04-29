@@ -1,4 +1,4 @@
-package com.nmmoc7.avarus.machine.setup;
+package com.nmmoc7.avarus.client.machine.setup;
 
 import com.nmmoc7.avarus.blockentities.AvarusBlockEntityTypes;
 import com.nmmoc7.avarus.client.renderers.machine.MultiBlockMachineBlockEntityRenderer;

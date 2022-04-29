@@ -6,8 +6,10 @@ d2d5d62bc7995573afd95e78485d93b153fcabda assets/avarus/models/block/blue_dirt.js
 e297951f10942efb6c65459de453e48449dbf078 assets/avarus/models/block/green_dirt.json
 ace60ab9a54ae6ee3b5dfe6ddf95b5cf99c4439d assets/avarus/models/block/red_dirt.json
 71eddd6ff1d04d4d4b9bdfb66a0b609811bd3820 assets/avarus/models/block/yellow_dirt.json
+f4bf193e6ba047f01024192678be05606fb82f77 assets/avarus/models/item/aquamarine.json
 46bbbba121dedd601ef0cfbb602e3b6dc89e7a90 assets/avarus/models/item/blue_dirt.json
 4ea701635ca61587619fbd34a7ab1f29c29acff1 assets/avarus/models/item/colorful_alloy.json
+56d83780cb2ef1172d6316a8fbb87fbcf86252e6 assets/avarus/models/item/colorful_alloy_hammer.json
 8577ad8ce9ed2522db4cd979aac3fcd4358a8923 assets/avarus/models/item/colorful_alloy_ingot.json
 2ecfc88b9890457a8c9def991ab672ebb6245d83 assets/avarus/models/item/colorful_powder.json
 9e059390ea465f34b45d6d05d3fcb470ab5ded9b assets/avarus/models/item/copper_gear.json
@@ -39,6 +41,5 @@ d19a7c4dcb3e8349ebd6de0ce007f4e6a63de18d data/avarus/recipes/tool_type/hammer/co
 18fb8fdaf997fafa994e7f0c85bb1e692c339ee0 data/avarus/recipes/tool_type/hammer/iron_hammer.json
 d81a8c744c1520439cd05f09e690e39535011338 data/avarus/recipes/tool_type/hammer/netherite_hammer.json
 9ff63be810660d62180c48e36dd2995fae1f720b data/avarus/tags/items/colorful_dirt.json
-be24b0999e22adcaa4c09576cee1817a93d3df68 data/avarus/tags/items/hammer_items.json
 ff06fab623b91664edd4d735f5ea8054c0cb6e93 data/minecraft/tags/blocks/mineable/shovel.json
 ff06fab623b91664edd4d735f5ea8054c0cb6e93 data/minecraft/tags/blocks/needs_iron_tool.json

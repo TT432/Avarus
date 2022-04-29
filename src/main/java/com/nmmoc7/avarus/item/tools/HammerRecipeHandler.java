@@ -1,6 +1,5 @@
 package com.nmmoc7.avarus.item.tools;
 
-import com.nmmoc7.avarus.item.AvarusItemTags;
 import com.nmmoc7.avarus.recipes.PlateRecipe;
 import com.nmmoc7.avarus.recipes.ToolTypeRecipe;
 import com.nmmoc7.avarus.utils.AvarusRecipeUtils;
@@ -39,7 +38,7 @@ public class HammerRecipeHandler {
             return;
         }
 
-        if (left.is(AvarusItemTags.HAMMER_ITEMS) && left.isDamageableItem()) {
+        if (left.isDamageableItem()) {
             ItemStack right = event.getRight();
 
             int damage = left.getDamageValue();

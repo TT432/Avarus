@@ -6,6 +6,7 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Matrix4f;
 import com.nmmoc7.avarus.client.machine.api.MachineClient;
 import com.nmmoc7.avarus.client.machine.api.MachineClientRegistry;
+import com.nmmoc7.avarus.client.models.BakedModelHandler;
 import com.nmmoc7.avarus.client.rendertype.AvarusRenderType;
 import com.nmmoc7.avarus.machine.api.Machine;
 import com.nmmoc7.avarus.machine.multiblock.blockentities.MultiBlockMachineBlockEntity;
@@ -14,9 +15,6 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.core.BlockPos;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author DustW
@@ -33,6 +31,12 @@ public class MultiBlockMachineBlockEntityRenderer implements BlockEntityRenderer
     @Override
     public void render(MultiBlockMachineBlockEntity blockEntity, float partialTick, PoseStack poseStack,
                        MultiBufferSource bufferSource, int packedLight, int packedOverlay) {
+
+        if (!blockEntity.isCreated()) {
+            BakedModelHandler.render(BakedModelHandler.machineCoreBlock,
+                    bufferSource, blockEntity, poseStack, packedLight, packedOverlay);
+        }
+
         if (blockEntity.getMachine() != null) {
             if (blockEntity.isCreated()) {
                 MachineClient<?> machineClient = MachineClientRegistry.getClient(blockEntity.getMachineType());
@@ -73,10 +77,7 @@ public class MultiBlockMachineBlockEntityRenderer implements BlockEntityRenderer
 
         boolean red = !machine.canCreate();
 
-        List<BlockPos> list = new ArrayList<>(machine.bodyPositions().keySet());
-        list.add(machine.getCorePosition());
-
-        for (BlockPos pos : list) {
+        for (BlockPos pos : machine.bodyPositions().keySet()) {
             line(builder, matrix, pos, 0, 0, 0, 1, 0, 0, red);
             line(builder, matrix, pos, 0, 1, 0, 1, 1, 0, red);
             line(builder, matrix, pos, 0, 0, 1, 1, 0, 1, red);

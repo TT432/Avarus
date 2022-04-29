@@ -71,6 +71,11 @@ public class AvarusItems {
     public static final RegistryObject<Item> COPPER_GEAR = ITEMS.register("copper_gear",
             () -> new Item(defaultProperties()));
 
+    // gams
+
+    public static final RegistryObject<Item> AQUAMARINE = ITEMS.register("aquamarine",
+            () -> new Item(defaultProperties()));
+
     // tools
 
     // hammers
