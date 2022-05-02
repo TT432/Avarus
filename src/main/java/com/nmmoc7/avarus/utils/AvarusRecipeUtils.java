@@ -8,6 +8,7 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 
 import javax.annotation.Nullable;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,16 +22,8 @@ public class AvarusRecipeUtils {
 
     @Nullable
     public static PlateRecipe getPlateRecipe(Level level, int hammerLevel, List<ItemStack> itemStacks) {
-        List<PlateRecipe> list = getRecipe(level, RecipeTypes.PLATE.get(), itemStacks);
-
-        int maxLevel = 0;
-        PlateRecipe recipe = null;
-        for (PlateRecipe plateRecipe : list) {
-            if (plateRecipe.requiredLevel > maxLevel && plateRecipe.requiredLevel <= hammerLevel) {
-                recipe = plateRecipe;
-            }
-        }
-
-        return recipe;
+        return getRecipe(level, RecipeTypes.PLATE.get(), itemStacks).stream()
+                .filter(s -> s.requiredLevel <= hammerLevel)
+                .max(Comparator.comparingInt(o -> o.requiredLevel)).orElse(null);
     }
 }
