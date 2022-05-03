@@ -9,6 +9,7 @@ import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.material.MaterialColor;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -40,6 +41,15 @@ public class AvarusBlocks {
     public static final RegistryObject<MultiBlockMachineBodyBlock> MULTI_BLOCK_MACHINE_BODY = BLOCKS.register("multi_block_machine_body", () ->
             new MultiBlockMachineBodyBlock(BlockBehaviour.Properties.of(Material.METAL).strength(5.0F, 6.0F).sound(SoundType.METAL).noOcclusion()));
 
+    // ores
+
+    public static final RegistryObject<Block> AQUAMARINE_ORE = BLOCKS.register("aquamarine_ore",
+            () -> new Block(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.STONE)
+                    .requiresCorrectToolForDrops().strength(1.5F, 6.0F)));
+
+    public static final RegistryObject<Block> DEEPSLATE_AQUAMARINE_ORE = BLOCKS.register("deepslate_aquamarine_ore",
+            () -> new Block(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.STONE)
+                    .requiresCorrectToolForDrops().strength(1.5F, 6.0F)));
 
 
 
