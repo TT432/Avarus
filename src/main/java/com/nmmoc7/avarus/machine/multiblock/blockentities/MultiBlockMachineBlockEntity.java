@@ -167,6 +167,8 @@ public class MultiBlockMachineBlockEntity extends BlockEntity implements TickAbl
             ClientboundBlockEntityDataPacket p = ClientboundBlockEntityDataPacket.create(this);
             ((ServerLevel)this.level).getChunkSource().chunkMap.getPlayers(new ChunkPos(getBlockPos()), false)
                     .forEach(k -> k.connection.send(p));
+
+            setChanged();
         }
     }
 
