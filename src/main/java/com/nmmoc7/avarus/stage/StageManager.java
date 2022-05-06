@@ -5,7 +5,9 @@ package com.nmmoc7.avarus.stage;
  **/
 public class StageManager {
     public enum Stage {
+        /** 一开始的阶段，暖暖的，很贴心 */
         DIRT(0),
+        /** 打败末影龙后的阶段，很好 */
         AQUA(1);
 
         int index;

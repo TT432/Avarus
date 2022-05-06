@@ -1,6 +1,7 @@
 package com.nmmoc7.avarus.block;
 
 import com.nmmoc7.avarus.Avarus;
+import com.nmmoc7.avarus.block.ore.AquamarineOre;
 import com.nmmoc7.avarus.fluids.AvarusFluids;
 import com.nmmoc7.avarus.machine.multiblock.block.MultiBlockMachineBodyBlock;
 import com.nmmoc7.avarus.machine.multiblock.block.MultiBlockMachineCoreBlock;
@@ -44,11 +45,11 @@ public class AvarusBlocks {
     // ores
 
     public static final RegistryObject<Block> AQUAMARINE_ORE = BLOCKS.register("aquamarine_ore",
-            () -> new Block(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.STONE)
+            () -> new AquamarineOre(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.STONE)
                     .requiresCorrectToolForDrops().strength(1.5F, 6.0F)));
 
     public static final RegistryObject<Block> DEEPSLATE_AQUAMARINE_ORE = BLOCKS.register("deepslate_aquamarine_ore",
-            () -> new Block(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.STONE)
+            () -> new AquamarineOre(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.STONE)
                     .requiresCorrectToolForDrops().strength(1.5F, 6.0F)));
 
 
