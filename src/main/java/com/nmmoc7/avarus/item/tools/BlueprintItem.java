@@ -1,4 +1,4 @@
-package com.nmmoc7.avarus.item.machine;
+package com.nmmoc7.avarus.item.tools;
 
 import com.nmmoc7.avarus.machine.api.Machine;
 import com.nmmoc7.avarus.machine.api.MachineType;

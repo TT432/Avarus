@@ -4,8 +4,9 @@ import com.nmmoc7.avarus.Avarus;
 import com.nmmoc7.avarus.block.AvarusBlocks;
 import com.nmmoc7.avarus.fluids.AvarusFluids;
 import com.nmmoc7.avarus.item.debug.ClearBlockItem;
-import com.nmmoc7.avarus.item.machine.BlueprintItem;
-import com.nmmoc7.avarus.item.machine.ColorfulHammerItem;
+import com.nmmoc7.avarus.item.tools.BlueprintItem;
+import com.nmmoc7.avarus.item.tools.ColorfulHammerItem;
+import com.nmmoc7.avarus.item.tools.HummerItem;
 import com.nmmoc7.avarus.machine.AvarusMachineTypes;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.BucketItem;
@@ -81,13 +82,13 @@ public class AvarusItems {
     // hammers
 
     public static final RegistryObject<Item> IRON_HAMMER = ITEMS.register("iron_hammer",
-            () -> new Item(defaultProperties().defaultDurability(512)));
+            () -> new HummerItem(defaultProperties().defaultDurability(512)));
 
     public static final RegistryObject<Item> COLORFUL_ALLOY_HAMMER = ITEMS.register("colorful_alloy_hammer",
             () -> new ColorfulHammerItem(defaultProperties().defaultDurability(2048)));
 
     public static final RegistryObject<Item> NETHERITE_HAMMER = ITEMS.register("netherite_hammer",
-            () -> new Item(defaultProperties().defaultDurability(8192)));
+            () -> new HummerItem(defaultProperties().defaultDurability(8192)));
 
     // buckets
 

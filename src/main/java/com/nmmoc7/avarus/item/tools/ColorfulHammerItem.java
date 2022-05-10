@@ -1,11 +1,10 @@
-package com.nmmoc7.avarus.item.machine;
+package com.nmmoc7.avarus.item.tools;
 
 import com.nmmoc7.avarus.machine.multiblock.blockentities.MultiBlockMachineBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
@@ -18,7 +17,7 @@ import java.util.List;
 /**
  * @author DustW
  **/
-public class ColorfulHammerItem extends Item {
+public class ColorfulHammerItem extends HummerItem {
     public ColorfulHammerItem(Properties pProperties) {
         super(pProperties);
     }
