@@ -4,10 +4,7 @@ import com.nmmoc7.avarus.datagen.recipes.*;
 import com.nmmoc7.avarus.item.AvarusItems;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.HashCache;
-import net.minecraft.data.recipes.FinishedRecipe;
-import net.minecraft.data.recipes.RecipeProvider;
-import net.minecraft.data.recipes.ShapedRecipeBuilder;
-import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
+import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -100,6 +97,11 @@ public class TutRecipes extends RecipeProvider {
                 .pattern("MMM")
                 .pattern("MSM")
                 .pattern(" S ")
+                .unlockedBy("has_stone", has(Blocks.DIORITE)).save(consumer);
+
+        ShapelessRecipeBuilder.shapeless(AvarusItems.IRON_PLATE.get())
+                .requires(AvarusItems.IRON_HAMMER.get())
+                .requires(Items.IRON_INGOT)
                 .unlockedBy("has_stone", has(Blocks.DIORITE)).save(consumer);
 
         SimpleCookingRecipeBuilder.blasting(

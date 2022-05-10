@@ -8,8 +8,8 @@ import java.util.Random;
 /**
  * @author DustW
  **/
-public class HummerItem extends Item {
-    public HummerItem(Properties pProperties) {
+public class HammerItem extends Item {
+    public HammerItem(Properties pProperties) {
         super(pProperties);
     }
 
@@ -22,6 +22,6 @@ public class HummerItem extends Item {
 
     @Override
     public boolean hasContainerItem(ItemStack stack) {
-        return true;
+        return stack.getDamageValue() != stack.getMaxDamage();
     }
 }

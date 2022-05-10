@@ -17,7 +17,7 @@ import java.util.List;
 /**
  * @author DustW
  **/
-public class ColorfulHammerItem extends HummerItem {
+public class ColorfulHammerItem extends HammerItem {
     public ColorfulHammerItem(Properties pProperties) {
         super(pProperties);
     }
